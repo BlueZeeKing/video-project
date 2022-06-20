@@ -1,7 +1,12 @@
+import video from "../example.mp4"
+
 export default function Video() {
   return (
     <div className="p-4 w-full">
-      <div className="bg-black text-white aspect-video w-full text-4xl text-center grid place-content-center">VIDEO HERE</div>
+      <video className="aspect-video w-full" controls>
+        <source src={video} type="video/mp4"/>
+        Your browser does not support the video tag.
+      </video>
     </div>
   )
 }
