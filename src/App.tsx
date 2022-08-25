@@ -22,10 +22,11 @@ export default function App() {
   });
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/question")
+    fetch(`${import.meta.env.VITE_HOST_URL}question`)
       .then((res) => res.json())
       .then((data) => setData({ ...data, loading: false }));
   }, []);
+
 
   return (
     <div>

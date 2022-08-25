@@ -38,7 +38,7 @@ export default function Question(props:{question:string, answers:string[], loadi
         <button
           className="bg-blue-500 p-2 px-6 rounded text-white shadow-md hover:shadow active:shadow-sm transition-all duration-100 outline outline-blue-400/50 outline-offset-0 outline-0 active:outline-[3px]"
           onClick={() =>
-            fetch("http://127.0.0.1:5000/submit", {
+            fetch(`${import.meta.env.VITE_HOST_URL}submit`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

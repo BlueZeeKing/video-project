@@ -6,7 +6,7 @@ CORS(app)
 
 @app.route("/question")
 def question():
-    response = jsonify({"question":"hello", "answers":["1", "2", "3"], "videoID":"salat", "videoPath":"http://127.0.0.1:5000/videos/salat.mp4"})
+    response = jsonify({"question":"What action is this person performing?", "answers":["Making a salad", "Cooking pasta", "Cutting an apple"], "videoID":"salat", "videoPath":"http://127.0.0.1:5000/videos/salat.mp4"})
     return response
 
 @app.route("/submit", methods=["POST"])
