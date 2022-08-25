@@ -38,6 +38,11 @@ export default function App() {
           answers={data.answers}
           loading={data.loading}
           videoID={data.videoID}
+          onSubmit={() =>
+            fetch(`${import.meta.env.VITE_HOST_URL}question`)
+              .then((res) => res.json())
+              .then((data) => setData({ ...data, loading: false }))
+          }
         />
       </div>
     </div>

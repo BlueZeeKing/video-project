@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import Skeleton from "react-loading-skeleton";
 import Spinner from "./Spinner";
 
-export default function Question(props:{question:string, answers:string[], loading:boolean, videoID:string}) {
+export default function Question(props:{question:string, answers:string[], loading:boolean, videoID:string, onSubmit: () => void}) {
   const [selected, setSelected] = useState(-1);
   
   return (
@@ -37,7 +37,7 @@ export default function Question(props:{question:string, answers:string[], loadi
         </div>
         <button
           className="bg-blue-500 p-2 px-6 rounded text-white shadow-md hover:shadow active:shadow-sm transition-all duration-100 outline outline-blue-400/50 outline-offset-0 outline-0 active:outline-[3px]"
-          onClick={() =>
+          onClick={() => {
             fetch(`${import.meta.env.VITE_HOST_URL}submit`, {
               method: "POST",
               headers: {
@@ -48,7 +48,8 @@ export default function Question(props:{question:string, answers:string[], loadi
                 selectedIndex: selected,
               }),
             })
-          }
+            props.onSubmit()
+          }}
         >
           Submit
         </button>
