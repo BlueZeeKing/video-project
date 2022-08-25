@@ -9,6 +9,7 @@ export default function Spinner() {
     >
       {[1, 2, 3, 4].map((item) => (
         <motion.div
+          key={item}
           className={`${
             item % 2 == 0 ? "bg-blue-500" : "bg-blue-400"
           } w-full h-full rounded-full ${

@@ -1,15 +1,18 @@
-import json, time
-from flask import Flask, render_template
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
-app = Flask(__name__, static_folder="../dist/assets", static_url_path='/assets', template_folder="../dist")
-
-@app.route("/")
-def index():
-    return render_template("index.html")
+app = Flask(__name__, static_folder="../videos", static_url_path='/videos')
+CORS(app)
 
 @app.route("/question")
 def question():
-    return json.dumps({"question":"hello", "answers":["1", "2", "3"]})
+    response = jsonify({"question":"hello", "answers":["1", "2", "3"], "videoID":"salat", "videoPath":"http://127.0.0.1:5000/videos/salat.mp4"})
+    return response
+
+@app.route("/submit", methods=["POST"])
+def submit():
+    print(request.json.get("selectedIndex"))
+    return "hello"
 
 if __name__ == "__main__":
     app.run(debug=True)

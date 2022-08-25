@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import Skeleton from "react-loading-skeleton";
 import Spinner from "./Spinner";
 
-export default function Question(props:{question:string, answers:string[], loading:boolean}) {
+export default function Question(props:{question:string, answers:string[], loading:boolean, videoID:string}) {
   const [selected, setSelected] = useState(-1);
   
   return (
@@ -19,17 +19,37 @@ export default function Question(props:{question:string, answers:string[], loadi
           <h2 className="font-bold text-xl">{props.question}</h2>
         )}
         <div className="py-4 flex flex-col">
-          {props.loading ? <div className="w-full flex flex-row place-content-center py-10"><Spinner /></div> : props.answers.map((item, index) => (
-            <Individual
-              item={item}
-              index={index}
-              selected={selected}
-              setSelected={setSelected}
-              key={item}
-            />
-          ))}
+          {props.loading ? (
+            <div className="w-full flex flex-row place-content-center py-10">
+              <Spinner />
+            </div>
+          ) : (
+            props.answers.map((item, index) => (
+              <Individual
+                item={item}
+                index={index}
+                selected={selected}
+                setSelected={setSelected}
+                key={item}
+              />
+            ))
+          )}
         </div>
-        <button className="bg-blue-500 p-2 px-6 rounded text-white shadow-md hover:shadow active:shadow-sm transition-all duration-100 outline outline-blue-400/50 outline-offset-0 outline-0 active:outline-[3px]">
+        <button
+          className="bg-blue-500 p-2 px-6 rounded text-white shadow-md hover:shadow active:shadow-sm transition-all duration-100 outline outline-blue-400/50 outline-offset-0 outline-0 active:outline-[3px]"
+          onClick={() =>
+            fetch("http://127.0.0.1:5000/submit", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                videoID: props.videoID,
+                selectedIndex: selected,
+              }),
+            })
+          }
+        >
           Submit
         </button>
       </div>
